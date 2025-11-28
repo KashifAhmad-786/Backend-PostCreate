@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-zinc-900 text-white">
+    <div class="max-w-2xl mx-auto p-8">
+        <!-- Upload File Section -->
+        <div>
+            <h1 class="text-4xl font-bold mb-8">Upload profile pic</h1>
+            
+            <form class="space-y-6" autocomplete="off" enctype="multipart/form-data" method="POST" action="/upload">
+                <!-- File Input -->
+                <div class="flex items-center gap-4">
+                    <input 
+                        type="file" 
+                        id="fileInput"
+                        class="hidden"
+                        name="image"
+                    >
+                    <label 
+                        for="fileInput"
+                        class="px-4 py-2 bg-white text-black font-semibold rounded cursor-pointer hover:bg-gray-200 transition"
+                    >
+                        Choose file
+                    </label>
+                    <span id="fileName" class="text-gray-400">No file chosen</span>
+                </div>
+
+                <!-- Upload Button -->
+                <div>
+                    <button 
+                        type="submit" 
+                        name="Upload"
+                        class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200"
+                    >
+                        Upload File
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileName.textContent = this.files[0].name;
+                fileName.classList.remove('text-gray-400');
+                fileName.classList.add('text-white');
+            } else {
+                fileName.textContent = 'No file chosen';
+                fileName.classList.add('text-gray-400');
+                fileName.classList.remove('text-white');
+            }
+        });
+    </script>
+</body>
+</html>
